@@ -47,29 +47,29 @@ To **log issues**, click [here](https://github.com/cloudsolutionhubs/autonomous-
 
 1. Login to OCI Console
 
-![](./images/1400/oci_console.png)
+![](./images/1400-2/oci_console.png)
 
 2. Click on the Hamburger menu on the top left corner of the screen.
 
 3. Scroll down and select the Market place option from the menu.
 
-![](./images/1400/ham_menu.png)
+![](./images/1400-2/ham_menu.png)
 
 4. Now you will see the market place console. On the left side of the screen, in the type dropdown menu, filter using data integration option.
 
-![](./images/1400/filter.png)
+![](./images/1400-2/filter.png)
 
 5. Select the Golden Gate Image.
 
-![](./images/1400/select_gg.png)
+![](./images/1400-2/select_gg.png)
 
 6. Select the Goldengate Edition and the compartment to deploy the golden gate image and click on Launch Stack button.
 
-![](./images/1400/prov_gg_1.png)
+![](./images/1400-2/prov_gg_1.png)
 
 7. This GoldenGate Classic image is deployed as a stack using terraform to automate the linux instance and Golden Gate installation. Enter the name for the stack that is going to be deployed. Please note that you need service limit to be available on your tenancy for VM shape 2.1 (minimum), to be able to provision this image.
 
-![](./images/1400/prov_gg_2.png)
+![](./images/1400-2/prov_gg_2.png)
 
 8. Click next.
 
@@ -79,7 +79,7 @@ To **log issues**, click [here](https://github.com/cloudsolutionhubs/autonomous-
 
 11. Select the compartment, VCN and the subnet where the compute instance needs to be provisioned.
 
-![](./images/1400/prov_gg_3.png)
+![](./images/1400-2/prov_gg_3.png)
 
 12. select the Availability Domain and the shape. For our usecase, we are going to select the checkbox "assign public ip address" as this compute instance needs to be in a public subnet to be able to access both the source and the target database.
 

@@ -1,10 +1,6 @@
-<table class="tbl-heading"><tr><td class="td-logo">![](images/obe_tag.png)
+### Dec 22, 2020
 
-Dec 22, 2020
-</td>
-<td class="td-banner">
 # Setting up initial load on GoldenGate to migrate the Data from On-Premise Database To Oracle Autonomous DB
-</td></tr><table>
 
 ## Introduction
 
@@ -595,10 +591,5 @@ In the Oracle GoldenGate source and target instance, you need to complete the fo
 
 -   You have now successfully migrated the data using Goldengate Initial Load Method.
 
-<table>
-<tr><td class="td-logo">[![](images/obe_tag.png)](#)</td>
-<td class="td-banner">
+
 ## Great Work - All Done!
-</td>
-</tr>
-<table>

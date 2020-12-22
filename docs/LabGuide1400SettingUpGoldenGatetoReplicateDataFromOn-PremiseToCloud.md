@@ -99,7 +99,111 @@ To **log issues**, click [here](https://github.com/cloudsolutionhubs/autonomous-
 ![](./images/1400-2/prov_gg_7.png)
 
 
-### **STEP 2: Configuring the Golden Gate instance**
+### **STEP 2: Configuring the Source Database instance**
+
+In the Oracle Source Database instance, you need to complete the following:
+
+
+**Steps**
+
+1. Login to the database
+
+    - SSH into the DB VM
+    
+        ```
+        $ ssh -i private_key opc@IP_address_of_your_instance
+        ```
+
+    - Change user to oracle.
+
+        ```
+        $ sudo su - oracle
+        ```
+
+    - Connect to the database 
+
+        ```
+        $ sqlplus / as sysdba
+        ```
+
+
+2. Create a common user in the container and grant golden gate previliges to the user.
+
+    ```
+    SQL > create user C##user01 identified by WElCome12_34#;
+    SQL > exec dbms_goldengate_auth.grant_admin_privilege('C##user01',container=>'all');
+    SQL > grant dba to C##user01;
+    SQL > grant dba to pdb1.appschema;
+    SQL > show parameter ENABLE_GOLDENGATE_REPLICATION;
+    SQL > alter system set ENABLE_GOLDENGATE_REPLICATION=true scope=both;
+    SQL > ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+    SQL > GRANT UNLIMITED TABLESPACE TO C##user01;
+    SQL > GRANT UNLIMITED TABLESPACE TO pdb1.appschema;
+    ```
+
+3. Verify the data to be migrated.
+
+    - Change the session to the PDB where we have the data to be migrated.
+    ```
+    SQL > alter session set container=<pdb_name>
+    ```
+
+    For example : 
+
+    ```
+    SQL > alter session set container=pdb1
+    ```
+
+    - Check the tables and/or database objects to be migrated.
+
+    ```
+    SQL > SELECT table_name, owner FROM all_tables WHERE owner='schema_name' ORDER BY owner, table_name
+    ```
+
+    Note : 
+    1. Please note that the string 'schema_name' is case-sensitive.
+
+    ![](./images/1400-2/src-tables.png)
+
+
+### **STEP 3: Configuring the target database instance**
+
+In the Oracle GoldenGate target instance, you need to complete the following:
+
+
+**Steps**
+
+1. Login to the database
+
+    - Connect to the Autonomous DB either using SQL Developer or SQL Client.
+    
+    ![](./images/1400-2/conn-adb.png)
+
+5. Create a new user for replication.
+
+    ```
+    drop user appschema cascade;
+    create user appschema identified by WElCome12_34#;
+    grant create session, resource, create view, create table to appschema;
+    alter user appschema quota unlimited on data;
+    ```
+
+6. Unlock GGADMIN user and grant necessary previliges.
+
+    ```
+    alter user ggadmin identified by WElCome12_34# account unlock;
+    alter user ggadmin quota unlimited on data;
+
+7.  Make sure the DDL has been executed on the target database for the tables that have to be migrated.
+
+    ```
+    SQL > SELECT table_name, owner FROM all_tables WHERE owner='APPSCHEMA' ORDER BY owner, table_name
+    ```
+
+    ![](./images/1400-2/trgt-tables.png)
+
+
+### **STEP 4: Configuring the Golden Gate instance**
 
 In the Oracle GoldenGate On Premises instance, you need to complete the following:
 
@@ -409,111 +513,8 @@ In the Oracle GoldenGate On Premises instance, you need to complete the followin
 
     ![](./images/1400-2/view-mgr.png)
 
-### **STEP 3: Configuring the Source Database instance**
 
-In the Oracle Source Database instance, you need to complete the following:
-
-
-**Steps**
-
-1. Login to the database
-
-    - SSH into the DB VM
-    
-        ```
-        $ ssh -i private_key opc@IP_address_of_your_instance
-        ```
-
-    - Change user to oracle.
-
-        ```
-        $ sudo su - oracle
-        ```
-
-    - Connect to the database 
-
-        ```
-        $ sqlplus / as sysdba
-        ```
-
-
-2. Create a common user in the container and grant golden gate previliges to the user.
-
-    ```
-    SQL > create user C##user01 identified by WElCome12_34#;
-    SQL > exec dbms_goldengate_auth.grant_admin_privilege('C##user01',container=>'all');
-    SQL > grant dba to C##user01;
-    SQL > grant dba to pdb1.appschema;
-    SQL > show parameter ENABLE_GOLDENGATE_REPLICATION;
-    SQL > alter system set ENABLE_GOLDENGATE_REPLICATION=true scope=both;
-    SQL > ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
-    SQL > GRANT UNLIMITED TABLESPACE TO C##user01;
-    SQL > GRANT UNLIMITED TABLESPACE TO pdb1.appschema;
-    ```
-
-3. Verify the data to be migrated.
-
-    - Change the session to the PDB where we have the data to be migrated.
-    ```
-    SQL > alter session set container=<pdb_name>
-    ```
-
-    For example : 
-
-    ```
-    SQL > alter session set container=pdb1
-    ```
-
-    - Check the tables and/or database objects to be migrated.
-
-    ```
-    SQL > SELECT table_name, owner FROM all_tables WHERE owner='schema_name' ORDER BY owner, table_name
-    ```
-
-    Note : 
-    1. Please note that the string 'schema_name' is case-sensitive.
-
-    ![](./images/1400-2/src-tables.png)
-
-
-### **STEP 3: Configuring the target database instance**
-
-In the Oracle GoldenGate target instance, you need to complete the following:
-
-
-**Steps**
-
-1. Login to the database
-
-    - Connect to the Autonomous DB either using SQL Developer or SQL Client.
-    
-    ![](./images/1400-2/conn-adb.png)
-
-5. Create a new user for replication.
-
-    ```
-    drop user appschema cascade;
-    create user appschema identified by WElCome12_34#;
-    grant create session, resource, create view, create table to appschema;
-    alter user appschema quota unlimited on data;
-    ```
-
-6. Unlock GGADMIN user and grant necessary previliges.
-
-    ```
-    alter user ggadmin identified by WElCome12_34# account unlock;
-    alter user ggadmin quota unlimited on data;
-
-7.  Make sure the DDL has been executed on the target database for the tables that have to be migrated.
-
-    ```
-    SQL > SELECT table_name, owner FROM all_tables WHERE owner='APPSCHEMA' ORDER BY owner, table_name
-    ```
-
-    ![](./images/1400-2/trgt-tables.png)
-
-
-### **STEP 4: Trigger the replication process and verify the data migration**
+### **STEP 5: Trigger the replication process and verify the data migration**
 
 In the Oracle GoldenGate source and target instance, you need to complete the following:
 

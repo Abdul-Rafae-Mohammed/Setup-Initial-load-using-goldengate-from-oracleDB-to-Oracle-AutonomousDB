@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+<table class="tbl-heading"><tr><td class="td-logo">[![](images/obe_tag.png)](README.md)
 
-You can use the [editor on GitHub](https://github.com/Abdul-Rafae-Mohammed/Setup-Initial-load-using-goldengate-from-oracleDB-to-Oracle-AutonomousDB/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Last Updated:<br>December 22, 2020
+</td>
+<td class="td-banner">
+# Migrating Data to Oracle Autonomous Database using Oracle Golden Gate
+</td></tr><table>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+This workshop walks you through all the steps to migrate data from an Oracle Database to Oracle Autonomous Database on Oracle Cloud Infrastructure (OCI).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+# How to Get Your Free Cloud Trial Account
+Please click on the following link to create your <a class=“trial-link” href="https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ex:tb:::RC_NAMK181011P00041:ATPHOL&SC=:ex:tb:::RC_NAMK181011P00041:ATPHOL&pcode=NAMK181011P00041" target="_trial">Free Account</a>, and complete all the required steps to get your free Oracle Cloud Trial Account. When you complete the registration process you'll receive a $300 credit that will enable you to complete the lab for free.  Additionally, you'll have 1000s of hours left over to continue to explore the Oracle Cloud.
 
-# Header 1
-## Header 2
-### Header 3
+  - Soon after requesting your trial you will receive the following email. You may begin working on the following exercise.
 
-- Bulleted
-- List
+  ![](images/readme/code_9.png)
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+# Workshop Overview
 
-[Link](url) and ![Image](src)
-```
+## Before You Begin
+**What is an Autonomous Transaction Processing?**
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Oracle Autonomous Transaction Processing delivers a self-driving, self-securing, self-repairing database service that can instantly scale to meet demands of mission critical transaction processing and mixed workload applications.  
 
-### Jekyll Themes
+Read on to begin your Getting Started journey with Oracle Autonomous Transaction Processing.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Abdul-Rafae-Mohammed/Setup-Initial-load-using-goldengate-from-oracleDB-to-Oracle-AutonomousDB/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+**You are all set, let's begin!**
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Performing data migration from an oracle database to Oracle Autonomous Database.
+
+**Key Objectives**:
+
+- Learn how to provision Oracle Goldengate on OCI
+- Learn how to configure source and target database for Oracle Goldengate
+- Learn how to setup and trigger data migration using the initial load process.
+
+**[Click here to run Lab 1](LabGuide1400SettingUpGoldenGatetoReplicateDataFromOn-PremiseToCloud.md)**
+
+
+## Learn More About Autonomous Database...
+
+Use these links to get more information about Oracle Autonomous Transaction Processing
+
+- [Oracle Autonomous Transaction Processing Cloud Website](https://www.oracle.com/database/autonomous-transaction-processing.html)
+- [Oracle Autonomous Transaction Processing Cloud docs](https://docs.oracle.com/en/cloud/paas/atp-cloud/index.html)

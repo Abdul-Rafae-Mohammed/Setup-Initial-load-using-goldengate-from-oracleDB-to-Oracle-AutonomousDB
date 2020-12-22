@@ -3,7 +3,7 @@
 Dec 22, 2020
 </td>
 <td class="td-banner">
-# Setting up initial load on GoldenGate to migrate the Data from On-Premise Database To Autonomous DB
+# Setting up initial load on GoldenGate to migrate the Data from On-Premise Database To Oracle Autonomous DB
 </td></tr><table>
 
 ## Introduction
